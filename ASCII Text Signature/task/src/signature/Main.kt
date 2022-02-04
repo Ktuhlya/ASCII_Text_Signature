@@ -63,14 +63,14 @@ class DrawAll(name: MutableList<String>, status: String ) {
             }
         }
 
-      if (nameSize > status.length) printAll(status, nameSize, 1)
-      else printAll(status, status.length, -1 )
+      if (nameSize > status.length) printAll(status, nameSize, nameSize, 1)
+      else printAll(status, status.length, nameSize, -1 )
 
 
       //  return max
     }
 
-    fun printAll(status: String, layoutSize: Int, state : Int) {
+    fun printAll(status: String, layoutSize: Int, nameSize : Int, state : Int) {
           var leftSpace = 0
         var rightSpace = 0
 
@@ -94,6 +94,15 @@ class DrawAll(name: MutableList<String>, status: String ) {
             println("*".repeat(layoutSize + 5))
            //  println(layoutSize + 5)
         }else{
+            if ((layoutSize -nameSize ) % 2 == 0){
+                leftSpace = (layoutSize+4 - nameSize)/2 -1
+                rightSpace =  (layoutSize+4 - nameSize)/2
+            }else {
+                leftSpace = (layoutSize+4 - nameSize) / 2
+                rightSpace = (layoutSize+4 - nameSize) / 2
+            }
+
+
             println("*".repeat(layoutSize + 5))
             for (i in 0..2) {
                 println(word[i].joinToString(" "))
