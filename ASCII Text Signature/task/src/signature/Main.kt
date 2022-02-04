@@ -10,7 +10,7 @@ val midLiteral= mapOf<String, String>("A" to "|__|","B" to "|__]","C" to "|   ",
   "E" to "|___","F" to "|___","G" to "| __","H" to "|__|","I" to "|","J" to " |",
   "K" to "|_/ ","L" to "|   ","M" to "|\\/|","N" to "|\\ |","O" to "|  |","P" to "|__]",
   "Q" to "|  |","R" to "|__/","S" to "[__ ","T" to " | ","U" to "|  |","V" to "|  |",
-  "W" to "| | |","X" to " \\/ ","Y" to " \\_/ ","Z" to "   /"," " to "    ")
+  "W" to "| | |","X" to " \\/ ","Y" to " \\_/ ","Z" to "  / "," " to "    ")
 
 val botLiteral= mapOf<String, String>("A" to "|  |","B" to "|__]","C" to "|___","D" to "|__/",
   "E" to "|___","F" to "|   ","G" to "|__]","H" to "|  |","I" to "|","J" to "_|",
@@ -88,27 +88,28 @@ class DrawAll(name: MutableList<String>, status: String ) {
 
             println("*".repeat(layoutSize + 5))
             for (i in 0..2) {
-                println(word[i].joinToString(" "))
+                println("*  " +word[i].joinToString(" ") + "  *")
             }
             println("*" + " ".repeat(leftSpace)  +status + " ".repeat(rightSpace)+ "*")
             println("*".repeat(layoutSize + 5))
            //  println(layoutSize + 5)
         }else{
             if ((layoutSize -nameSize ) % 2 == 0){
-                leftSpace = (layoutSize+4 - nameSize)/2 -1
-                rightSpace =  (layoutSize+4 - nameSize)/2
+                leftSpace = (layoutSize+6 - nameSize)/2 -1
+                rightSpace =  (layoutSize+6 - nameSize)/2
             }else {
-                leftSpace = (layoutSize+4 - nameSize) / 2
-                rightSpace = (layoutSize+4 - nameSize) / 2
+                leftSpace = (layoutSize+6 - nameSize) / 2
+                rightSpace = (layoutSize+6 - nameSize) / 2
             }
 
 
-            println("*".repeat(layoutSize + 5))
+            println("*".repeat(layoutSize + 6))
             for (i in 0..2) {
-                println(word[i].joinToString(" "))
+                println("*" + " ".repeat(leftSpace)+
+                        word[i].joinToString(" ") + " ".repeat(rightSpace) + "*")
             }
-            println(status)
-            println("*".repeat(layoutSize + 5))
+            println("*  " +status + "  *")
+            println("*".repeat(layoutSize + 6))
             // println(layoutSize + 5)
         }
 
@@ -141,8 +142,8 @@ var subListBot = mutableListOf<String>()
        for(i in 0 until size) {
           subListTop.add(i, topLiteral.getValue(string[i]))
        }
-        subListTop.add(0, "* ")
-        subListTop.add(subListTop.size, " *")
+     //   subListTop.add(0, "* ")
+     //   subListTop.add(subListTop.size, " *")
         buildString(subListTop)
     }
 
@@ -150,8 +151,8 @@ var subListBot = mutableListOf<String>()
         for(i in 0 until size) {
             subListMid.add(i, midLiteral.getValue(string[i]))
         }
-        subListMid.add(0, "* ")
-        subListMid.add(subListMid.size, " *")
+     //   subListMid.add(0, "* ")
+     //   subListMid.add(subListMid.size, " *")
         buildString(subListMid)
     }
 
@@ -159,8 +160,8 @@ var subListBot = mutableListOf<String>()
         for(i in 0 until size) {
             subListBot.add(i, botLiteral.getValue(string[i]))
         }
-        subListBot.add(0, "* ")
-        subListBot.add(subListBot.size, " *")
+     //   subListBot.add(0, "* ")
+     //   subListBot.add(subListBot.size, " *")
         buildString(subListBot)
     }
 
