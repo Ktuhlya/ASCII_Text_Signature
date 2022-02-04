@@ -3,7 +3,7 @@ package signature
 val topLiteral= mapOf<String, String>("A" to "____","B" to "___ ","C" to "____","D" to "___ ",
   "E" to "____","F" to "____","G" to "____","H" to "_  _","I" to "_","J" to " _",
   "K" to "_  _","L" to "_   ","M" to "_  _","N" to "_  _","O" to "____","P" to "___ ",
-  "Q" to "____","R" to "____","S" to "____","T" to "___","U" to "____","V" to "_  _",
+  "Q" to "____","R" to "____","S" to "____","T" to "___","U" to "_  _","V" to "_  _",
   "W" to "_ _ _","X" to "_  _","Y" to "_   _","Z" to "___ "," " to "    ")
 
 val midLiteral= mapOf<String, String>("A" to "|__|","B" to "|__]","C" to "|   ","D" to "|  \\",
@@ -53,7 +53,7 @@ class DrawAll(name: MutableList<String>, status: String ) {
                 (name[i].toString() != "W") && (name[i].toString() != " ")) {
                 nameSize += 5
             }else{
-                if (name[i].toString() == " ") nameSize += 7
+                if (name[i].toString() == " ") nameSize += 5
                 if (name[i].toString() == "I") nameSize += 2
                 if (name[i].toString() == "J") nameSize += 3
                 if (name[i].toString() == "W") nameSize += 6
@@ -63,23 +63,36 @@ class DrawAll(name: MutableList<String>, status: String ) {
             }
         }
 
-      val max = if (nameSize > status.length) printAll(status, nameSize, 1)
+      if (nameSize > status.length) printAll(status, nameSize, 1)
       else printAll(status, status.length, -1 )
 
 
-        return max
+      //  return max
     }
 
     fun printAll(status: String, layoutSize: Int, state : Int) {
+          var leftSpace = 0
+        var rightSpace = 0
+
+
 
         if (state ==1) {
+            if ((layoutSize - status.length) % 2 == 0){
+                leftSpace = (layoutSize+4 -status.length)/2 -1
+                rightSpace =  (layoutSize+4 -status.length)/2
+            }else {
+                leftSpace = (layoutSize+4 - status.length) / 2
+                rightSpace = (layoutSize+4 - status.length) / 2
+            }
+
+
             println("*".repeat(layoutSize + 5))
             for (i in 0..2) {
                 println(word[i].joinToString(" "))
             }
-            println(status)
+            println("*" + " ".repeat(leftSpace)  +status + " ".repeat(rightSpace)+ "*")
             println("*".repeat(layoutSize + 5))
-            // println(layoutSize + 5)
+           //  println(layoutSize + 5)
         }else{
             println("*".repeat(layoutSize + 5))
             for (i in 0..2) {
@@ -93,7 +106,6 @@ class DrawAll(name: MutableList<String>, status: String ) {
 
 }
 }
-
 
 
 
@@ -120,8 +132,8 @@ var subListBot = mutableListOf<String>()
        for(i in 0 until size) {
           subListTop.add(i, topLiteral.getValue(string[i]))
        }
-        subListTop.add(0, "*  ")
-        subListTop.add(subListTop.size, "  *")
+        subListTop.add(0, "* ")
+        subListTop.add(subListTop.size, " *")
         buildString(subListTop)
     }
 
@@ -129,8 +141,8 @@ var subListBot = mutableListOf<String>()
         for(i in 0 until size) {
             subListMid.add(i, midLiteral.getValue(string[i]))
         }
-        subListMid.add(0, "*  ")
-        subListMid.add(subListMid.size, "  *")
+        subListMid.add(0, "* ")
+        subListMid.add(subListMid.size, " *")
         buildString(subListMid)
     }
 
@@ -138,8 +150,8 @@ var subListBot = mutableListOf<String>()
         for(i in 0 until size) {
             subListBot.add(i, botLiteral.getValue(string[i]))
         }
-        subListBot.add(0, "*  ")
-        subListBot.add(subListBot.size, "  *")
+        subListBot.add(0, "* ")
+        subListBot.add(subListBot.size, " *")
         buildString(subListBot)
     }
 
