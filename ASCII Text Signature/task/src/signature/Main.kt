@@ -24,26 +24,16 @@ fun main() {
 
     val name = readln().uppercase().toMutableList()
     val status = readln()
-    val maxLenght= if (name.size > status.length) name.size else status.length
-   // println()
-
 
     DrawLiteral(name.map { it.toString() } as MutableList<String>, name.size)
     DrawAll(name.map { it.toString()} as MutableList<String> , status)
-
-
-
 
 }
 
 class DrawAll(name: MutableList<String>, status: String ) {
 
-//var layoutSize = maxSize(name, status)
-//var state = 1
-
     init {
         maxSize(name, status)
-       // printAll(status)
     }
     fun maxSize(name: MutableList<String>, status: String  ) {
         var nameSize = 0
@@ -66,15 +56,11 @@ class DrawAll(name: MutableList<String>, status: String ) {
       if (nameSize > status.length) printAll(status, nameSize, nameSize, 1)
       else printAll(status, status.length, nameSize, -1 )
 
-
-      //  return max
     }
 
     fun printAll(status: String, layoutSize: Int, nameSize : Int, state : Int) {
           var leftSpace = 0
         var rightSpace = 0
-
-
 
         if (state ==1) {
             if ((layoutSize - status.length) % 2 == 0){
@@ -84,7 +70,6 @@ class DrawAll(name: MutableList<String>, status: String ) {
                 leftSpace = (layoutSize+4 - status.length) / 2
                 rightSpace = (layoutSize+4 - status.length) / 2
             }
-
 
             println("*".repeat(layoutSize + 5))
             for (i in 0..2) {
@@ -102,7 +87,6 @@ class DrawAll(name: MutableList<String>, status: String ) {
                 rightSpace = (layoutSize+6 - nameSize) / 2
             }
 
-
             println("*".repeat(layoutSize + 6))
             for (i in 0..2) {
                 println("*" + " ".repeat(leftSpace)+
@@ -112,8 +96,6 @@ class DrawAll(name: MutableList<String>, status: String ) {
             println("*".repeat(layoutSize + 6))
             // println(layoutSize + 5)
         }
-
-
 }
 }
 
@@ -142,8 +124,6 @@ var subListBot = mutableListOf<String>()
        for(i in 0 until size) {
           subListTop.add(i, topLiteral.getValue(string[i]))
        }
-     //   subListTop.add(0, "* ")
-     //   subListTop.add(subListTop.size, " *")
         buildString(subListTop)
     }
 
@@ -151,8 +131,6 @@ var subListBot = mutableListOf<String>()
         for(i in 0 until size) {
             subListMid.add(i, midLiteral.getValue(string[i]))
         }
-     //   subListMid.add(0, "* ")
-     //   subListMid.add(subListMid.size, " *")
         buildString(subListMid)
     }
 
@@ -160,8 +138,6 @@ var subListBot = mutableListOf<String>()
         for(i in 0 until size) {
             subListBot.add(i, botLiteral.getValue(string[i]))
         }
-     //   subListBot.add(0, "* ")
-     //   subListBot.add(subListBot.size, " *")
         buildString(subListBot)
     }
 
@@ -173,12 +149,7 @@ var subListBot = mutableListOf<String>()
 
 
 
-////
 
 /*
-
-word.add(0, mutableListOf(drawTop("X"), drawTop("u"), drawTop("y")))
-    word.add(1, mutableListOf(drawMid("X"), drawMid("u"), drawMid("y")))
-    word.add(2, mutableListOf(drawBot("X"), drawBot("u"), drawBot("y")))
 
  */
