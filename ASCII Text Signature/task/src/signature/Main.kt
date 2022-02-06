@@ -1,5 +1,104 @@
 package signature
 
+import java.io.File
+
+val mediumFile = File("ASCII Text Signature/task/src/medium.txt")
+val romanFile = File("ASCII Text Signature/task/src/roman.txt")
+
+var statusList = mutableListOf<MutableList<String>>()
+val nameList = mutableListOf<MutableList<String>>()
+
+var statusSize =0
+var nameSize =0
+
+fun main() {
+
+    statusList.add(0, mutableListOf())
+    statusList.add(1, mutableListOf())
+    statusList.add(2, mutableListOf())
+    nameList.add(0, mutableListOf())
+    nameList.add(1, mutableListOf())
+    nameList.add(2, mutableListOf())
+    nameList.add(3, mutableListOf())
+    nameList.add(4, mutableListOf())
+    nameList.add(5, mutableListOf())
+    nameList.add(6, mutableListOf())
+    nameList.add(7, mutableListOf())
+    nameList.add(8, mutableListOf())
+    nameList.add(9, mutableListOf())
+
+
+
+        val status = readln()!!
+         val name = readln()!!
+
+    WriteToList().splitString(status, mediumFile)
+    WriteToList().splitString(name, romanFile)
+    for (i in 0..2) {
+        println(statusList[i].joinToString(" "))
+    }
+    println(statusSize)
+    for (i in 0..9){
+        println(nameList[i].joinToString(" "))
+    }
+    println(nameSize)
+
+    }
+
+
+
+class WriteToList() {
+
+    fun splitString(str: String , file: File) {
+
+        for (i in 0 until str.length) findString(str[i].toString(), file )
+    }
+
+    fun findString( liter: String, file: File) {
+        var indStr = 1
+      for (i in 0 until file.readLines().size)  {
+          if (file.readLines()[i].first().toString() == liter ){
+              indStr = i+1
+          }
+      }
+        when ( file){
+            mediumFile -> statusList(indStr)
+            romanFile -> nameList(indStr)
+        }
+    }
+
+        private fun statusList(indStr: Int,) {
+            var size = mediumFile.readLines()[indStr-1].substring(2).toInt()
+            statusSize += size
+            for (i in 0..2) statusList[i].add(mediumFile.readLines()[indStr + i])
+        }
+
+        private fun nameList(indStr: Int) {
+            var size = romanFile.readLines()[indStr-1].substring(2).toInt()
+            nameSize += size
+            for (i in 0..9) nameList[i].add(romanFile.readLines()[indStr + i])
+        }
+
+   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+
+               THE  OLD VERSION
+
+
 val topLiteral= mapOf<String, String>("A" to "____","B" to "___ ","C" to "____","D" to "___ ",
   "E" to "____","F" to "____","G" to "____","H" to "_  _","I" to "_","J" to " _",
   "K" to "_  _","L" to "_   ","M" to "_  _","N" to "_  _","O" to "____","P" to "___ ",
@@ -146,10 +245,5 @@ var subListBot = mutableListOf<String>()
 
 }
 
-
-
-
-
-/*
 
  */
