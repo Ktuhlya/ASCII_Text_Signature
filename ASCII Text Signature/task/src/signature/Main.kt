@@ -8,27 +8,18 @@ val romanFile = File("src/roman.txt")
 //val mediumFile = File("ASCII Text Signature/task/src/medium.txt")
 //val romanFile = File("ASCII Text Signature/task/src/roman.txt")
 
-var statusList = mutableListOf<MutableList<String>>()
+val statusList = mutableListOf<MutableList<String>>()
 val nameList = mutableListOf<MutableList<String>>()
+
+
 
 var statusSize =0
 var nameSize =0
 
 fun main() {
 
-    statusList.add(0, mutableListOf())
-    statusList.add(1, mutableListOf())
-    statusList.add(2, mutableListOf())
-    nameList.add(0, mutableListOf())
-    nameList.add(1, mutableListOf())
-    nameList.add(2, mutableListOf())
-    nameList.add(3, mutableListOf())
-    nameList.add(4, mutableListOf())
-    nameList.add(5, mutableListOf())
-    nameList.add(6, mutableListOf())
-    nameList.add(7, mutableListOf())
-    nameList.add(8, mutableListOf())
-    nameList.add(9, mutableListOf())
+    for (i in 0..2) statusList.add(i, mutableListOf())
+    for (i in  0..9) nameList.add(i, mutableListOf())
 
     print("Enter name and surname: ")
     val name = readln()!!
