@@ -28,22 +28,27 @@ fun main() {
     nameList.add(9, mutableListOf())
 
 
-
-        val status = readln()!!
-         val name = readln()!!
+    val status = readln()!!
+    val name = readln()!!
 
     WriteToList().splitString(status, mediumFile)
     WriteToList().splitString(name, romanFile)
+
+    check()
+}
+
+fun check () {
+
     for (i in 0..2) {
-        println(statusList[i].joinToString(" "))
+        println(statusList[i].joinToString(""))
     }
     println(statusSize)
     for (i in 0..9){
-        println(nameList[i].joinToString(" "))
+        println(nameList[i].joinToString(""))
     }
     println(nameSize)
 
-    }
+}
 
 
 
@@ -51,35 +56,68 @@ class WriteToList() {
 
     fun splitString(str: String , file: File) {
 
-        for (i in 0 until str.length) findString(str[i].toString(), file )
+        for (i in 0 until str.length) {
+            if (str[i].toString() == " ") {
+                when (file) {
+                    mediumFile -> statusList(0, true)
+                    romanFile -> nameList(0, true)
+                }
+            } else {
+                findString(str[i].toString(), file)
+            }
+        }
     }
 
     fun findString( liter: String, file: File) {
         var indStr = 1
-      for (i in 0 until file.readLines().size)  {
-          if (file.readLines()[i].first().toString() == liter ){
-              indStr = i+1
-          }
-      }
-        when ( file){
-            mediumFile -> statusList(indStr)
-            romanFile -> nameList(indStr)
+        if ((liter == "d") && (file == romanFile)) {
+            nameList(35, false)
+        } else {
+            for (i in 0 until file.readLines().size) {
+                if (file.readLines()[i].first().toString() == liter) {
+                    indStr = i + 1
+                }
+            }
+            when (file) {
+                mediumFile -> statusList(indStr, false)
+                romanFile -> nameList(indStr, false)
+            }
         }
     }
 
-        private fun statusList(indStr: Int,) {
-            var size = mediumFile.readLines()[indStr-1].substring(2).toInt()
+        private fun statusList(indStr: Int, spaceCheck: Boolean) {
+            var size = 0
+            if (spaceCheck) {
+                size = 6
+                for (i in 0..2) statusList[i].add("      ")
+            } else {
+                 size = mediumFile.readLines()[indStr - 1].substring(2).toInt()
+                for (i in 0..2) statusList[i].add(mediumFile.readLines()[indStr + i])
+            }
             statusSize += size
-            for (i in 0..2) statusList[i].add(mediumFile.readLines()[indStr + i])
         }
 
-        private fun nameList(indStr: Int) {
-            var size = romanFile.readLines()[indStr-1].substring(2).toInt()
+        private fun nameList(indStr: Int, spaceCheck: Boolean) {
+            var size = 0
+            if (spaceCheck) {
+               size = 6
+                for (i in 0..9) nameList[i].add("      ")
+            } else {
+                 size = romanFile.readLines()[indStr - 1].substring(2).toInt()
+
+                for (i in 0..9) nameList[i].add(romanFile.readLines()[indStr + i])
+            }
             nameSize += size
-            for (i in 0..9) nameList[i].add(romanFile.readLines()[indStr + i])
         }
 
    }
+
+class DrawAll(nameSize: Int, statusSize: Int) {
+
+    fun checkSize(nameSize: Int, statusSize: Int) {
+
+    }
+}
 
 
 
