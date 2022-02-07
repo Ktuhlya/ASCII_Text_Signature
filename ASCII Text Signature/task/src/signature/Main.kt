@@ -2,8 +2,11 @@ package signature
 
 import java.io.File
 
-val mediumFile = File("ASCII Text Signature/task/src/medium.txt")
-val romanFile = File("ASCII Text Signature/task/src/roman.txt")
+val mediumFile = File("src/medium.txt")
+val romanFile = File("src/roman.txt")
+
+//val mediumFile = File("ASCII Text Signature/task/src/medium.txt")
+//val romanFile = File("ASCII Text Signature/task/src/roman.txt")
 
 var statusList = mutableListOf<MutableList<String>>()
 val nameList = mutableListOf<MutableList<String>>()
@@ -34,25 +37,8 @@ fun main() {
 
     WriteToList().splitString(name, romanFile)
     WriteToList().splitString(status, mediumFile)
-  //  check()
     DrawAll().checkSize(nameSize, statusSize)
-
 }
-
-fun check () {
-
-    for (i in 0..2) {
-        println(statusList[i].joinToString(""))
-    }
-    println(statusSize)
-    for (i in 0..9){
-        println(nameList[i].joinToString(""))
-    }
-    println(nameSize)
-
-}
-
-
 
 class WriteToList() {
 
@@ -72,17 +58,20 @@ class WriteToList() {
 
     fun findString( liter: String, file: File) {
         var indStr = 1
-        if ((liter == "d") && (file == romanFile)) {
-            nameList(35, false)
-        } else {
-            for (i in 0 until file.readLines().size) {
-                if (file.readLines()[i].first().toString() == liter) {
-                    indStr = i + 1
+        when {
+            ((liter == "d") && (file == romanFile)) -> nameList(35, false)
+            ((liter == "o") && (file == romanFile)) -> nameList(156, false)
+
+            else -> {
+                for (i in 0 until file.readLines().size) {
+                    if (file.readLines()[i].first().toString() == liter) {
+                        indStr = i + 1
+                    }
                 }
-            }
-            when (file) {
-                mediumFile -> statusList(indStr, false)
-                romanFile -> nameList(indStr, false)
+                when (file) {
+                    mediumFile -> statusList(indStr, false)
+                    romanFile -> nameList(indStr, false)
+                }
             }
         }
     }
@@ -102,8 +91,8 @@ class WriteToList() {
         private fun nameList(indStr: Int, spaceCheck: Boolean) {
             var size = 0
             if (spaceCheck) {
-               size = 9
-                for (i in 0..9) nameList[i].add("         ")
+               size = 10
+                for (i in 0..9) nameList[i].add("          ")
             } else {
                  size = romanFile.readLines()[indStr - 1].substring(2).toInt()
 
@@ -111,7 +100,6 @@ class WriteToList() {
             }
             nameSize += size
         }
-
    }
 
 class DrawAll() {
@@ -123,45 +111,42 @@ class DrawAll() {
 
     private fun printAll(totalSize: Int, i: Int) {
 
-
         if( i > 0) {
-         val rightSpace = if ((nameSize - statusSize)%2 == 0 ) 0 else 1
-            println("8".repeat(totalSize + 9))
-            for (i in 0..9){
-                println("88  " + nameList[i].joinToString("")
-                        + "   88")
+            val rightSpace = if ((nameSize - statusSize) % 2 == 0) 0 else 1
+            println("8".repeat(totalSize + 8))
+            for (i in 0..9) {
+                println(
+                    "88  " + nameList[i].joinToString("")
+                            + "  88"
+                )
             }
             for (i in 0..2) {
-                println("88  " + " ".repeat((nameSize- statusSize)/2 )
-                        +statusList[i].joinToString("")
-                        + " ".repeat((nameSize - statusSize)/2 +rightSpace )
-                        + "   88")
+                println(
+                    "88  " + " ".repeat((nameSize - statusSize) / 2)
+                            + statusList[i].joinToString("")
+                            + " ".repeat((nameSize - statusSize) / 2 + rightSpace)
+                            + "  88"
+                )
             }
-            println("8".repeat(totalSize +9))
-
+            println("8".repeat(totalSize + 8))
         }
 
         if( i < 0) {
             val rightSpace = if ((statusSize - nameSize)%2 == 0 ) 0 else 1
-            println("8".repeat(totalSize + 9))
+            println("8".repeat(totalSize + 8))
             for(i in 0..9) {
                 println("88  " + " ".repeat((statusSize- nameSize)/2)
                     + nameList[i].joinToString("")
                         + " ".repeat((statusSize - nameSize)/2 +rightSpace)
-                    + "   88")
+                    + "  88")
             }
             for (i in 0..2) {
                 println("88  " + statusList[i].joinToString("")
-                        + "   88")
+                        + "  88")
             }
-            println("8".repeat(totalSize +9))
-
+            println("8".repeat(totalSize +8))
         }
-
     }
-
-
-
 }
 
 
